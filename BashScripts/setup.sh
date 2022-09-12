@@ -1,5 +1,14 @@
 #! /bin/bash
 
+#title:         setup.sh
+#description:   My base application install (Linux Mint)
+#author:        Dave Edwards
+#created:       August 08 2022
+#updated:       N/A
+#version:       1.0
+#usage:         ./setup.sh
+#==============================================================================
+
 # New laptop setup 
 # updated 10/08/2022
 
