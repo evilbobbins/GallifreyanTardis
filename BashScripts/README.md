@@ -1,5 +1,2 @@
 # Bash Script to update system 
-Nala
-Apt
-Flatpak
-Snap
+OPtions for Nala, Apt, Flatpak & Snap
