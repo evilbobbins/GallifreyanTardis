@@ -1,4 +1,4 @@
-Bash Script to update system 
+# Bash Script to update system 
 Nala
 Apt
 Flatpak
