@@ -41,25 +41,77 @@ Clear-Host
 write-host $logo
 }
 
-Function menu {
+function menu {
+
+        do {
+                do {
+                    write-host ""
+                    write-host "A - For Build Desk"
+                    write-host "B - Assisted Entry"
+                    write-host "C - Full Manual"
+                    write-host "D - Reload"
+                    write-host ""
+                    write-host "X - Exit"
+                    write-host ""
+                    write-host -nonewline "Type your choice and press Enter: "
+                    
+                    $choice = read-host
+                    
+                    write-host ""
+                    
+                    $ok = $choice -match '^[abcdx]+$'
+                    
+                    if ( -not $ok) { write-host "Invalid selection" }
+                } until ( $ok )
+                
+                switch -Regex ( $choice ) {
+                    "A"
+                    {
+                        BuildDeskCheck
+                    }
+                    
+                    "B"
+                    {
+                        AssistedEntry
+                    }
+            
+                    "C"
+                    {
+                        ManualEntryCheck
+                    }
+            
+                    "D"
+                    {
+                        write-host "Reload Description - not built yet"
+                    }
+                }
+            } until ( $choice -match "X" )
+            
+}
+
+
+Function menuheader {
 logo
 Write-Host -Verbose "Using $adserver Server`n"
 #Write-Host -Verbose "Current $pcname Description"
 $compnamecur, $compdeccur | Format-List
+menu
 }
 
 Function NoChangesMade {
 Write-Host "No Changes made`n" -ForegroundColor Green
 Write-Host "Exiting Script" -ForegroundColor Green
 Start-Sleep -Seconds 2
-Exit
+menuheader 
+#Exit
 }
 
 Function ChangesMade {
 Write-Host "Update of $pcname Compleate`n"
 Write-Host "Exiting Script"
 Start-Sleep -Seconds 2
-Exit
+#Exit
+menuheader 
 }
 
 Function ADCheck {
@@ -127,7 +179,7 @@ $compname, $compdec | Format-List
 ChangesMade
 }
 else {
-menu
+menuheader
 NoChangesMade
 }
 }
@@ -155,7 +207,7 @@ $compname, $compdec | Format-List
 ChangesMade
 }
 else {
-menu
+menuheader
 NoChangesMade
 }
 }
@@ -287,7 +339,7 @@ ChangesMade
 }
 
 else {
-menu
+menuheader
 NoChangesMade
 }
 }
@@ -298,9 +350,5 @@ NoChangesMade
 logo
 ADCheck
 Compname
+menuheader
 menu
-BuildDeskCheck
-menu
-ManualEntryCheck
-menu
-AssistedEntry
