@@ -9,7 +9,7 @@
 #===================================================
 
 Remove-Variable * -ErrorAction SilentlyContinue
-cls
+Clear-Host
 $ErrorActionPreference = 'SilentlyContinue'
 
 #logo site
@@ -37,7 +37,7 @@ $global:builddesk = "* On Build Desks" #Build desk name
 #Functions
 
 Function logo {
-cls
+Clear-Host
 write-host $logo
 }
 
