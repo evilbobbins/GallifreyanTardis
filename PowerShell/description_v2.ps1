@@ -259,7 +259,7 @@ switch ($model)
 
 "3"
 
-{ $global:model1 = "$latl13" }
+{ $global:model1 = "$latl3" }
 
 default
 
@@ -272,7 +272,7 @@ else {
 #$Computermodel = Read-Host -Prompt "`nEnter Computer Model"
 
 write-output "Laptop type`n"
-$model = Read-Host "1 = $latp1 2 = $latp2 3 = $latp13"
+$model = Read-Host "1 = $latp1 2 = $latp2 3 = $latp3"
 
 switch ($model)
 
