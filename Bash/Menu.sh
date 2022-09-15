@@ -161,5 +161,3 @@ LOG
     sudo flatpak uninstall --unused >> $log
 LOGEND 
 fi
-
-MENU
