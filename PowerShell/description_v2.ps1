@@ -3,18 +3,14 @@
 #logo site      https://texteditor.com/multiline-text-art/
 #author:        Dave Edwards
 #created:       September 13 2022
-#updated:       September 13 2022
-#version:       2.0
+#updated:       September 15 2022
+#version:       2.2
 #usage:         ./description_v2.ps1
 #===================================================
 
 Remove-Variable * -ErrorAction SilentlyContinue
 Clear-Host
 $ErrorActionPreference = 'SilentlyContinue'
-
-#logo site
-#https://texteditor.com/multiline-text-art/
-
 
 #Variables
 $logo = @"
@@ -33,6 +29,14 @@ $logo = @"
 "@
 $global:adserver = "SDCBFISLTC21" # AD server to lockon to 
 $global:builddesk = "* On Build Desks" #Build desk name
+#Laptop Models
+$global:latl1 = "5400"
+$global:latl2 = "7420"
+$global:latl3 = "7430"
+$global:latp1 = "3571"
+$global:latp2 = "5560"
+$global:latp3 = "5570"
+
 
 #Functions
 
@@ -82,13 +86,13 @@ function menu {
             
                     "D"
                     {
-                        write-host "Reload Description - not built yet"
+                        Reload
                     }
                 }
             } until ( $choice -match "X" )
+              exit
             
 }
-
 
 Function menuheader {
 logo
@@ -158,8 +162,6 @@ else {
 
 Function BuildDeskCheck {
 
-$confirmation = Read-Host "For Build Desk? (y)"
-if ($confirmation -eq 'y') {
 Write-Host "`nCurrent $pcname Description" -ForegroundColor Green -NoNewline
 $compnamecur, $compdeccur | Format-List
 
@@ -183,11 +185,8 @@ menuheader
 NoChangesMade
 }
 }
-}
 
 Function ManualEntryCheck {
-$confirmation = Read-Host "Full Manual Entry? (y)"
-if ($confirmation -eq 'y') {
 
 $manual = Read-Host -Prompt "`nEnter full name and description"
 
@@ -209,7 +208,6 @@ ChangesMade
 else {
 menuheader
 NoChangesMade
-}
 }
 }
 
@@ -245,7 +243,7 @@ if($type1 -match 'Latitude') {
 #$Computermodel = Read-Host -Prompt "`nEnter Computer Model"
 
 write-output "Laptop type`n"
-$model = Read-Host "1 = 5400 2 = 7420 3 = 7430"
+$model = Read-Host "1 = $latl1 2 = $latl2 3 = $latl3"
 
 switch ($model)
 
@@ -253,15 +251,15 @@ switch ($model)
 
 "1"
 
-{ $global:model1 = "5400" }
+{ $global:model1 = "$latl1" }
 
 "2"
 
-{ $global:model1 = "7420" }
+{ $global:model1 = "$latl2" }
 
 "3"
 
-{ $global:model1 = "7430" }
+{ $global:model1 = "$latl13" }
 
 default
 
@@ -274,7 +272,7 @@ else {
 #$Computermodel = Read-Host -Prompt "`nEnter Computer Model"
 
 write-output "Laptop type`n"
-$model = Read-Host "1 = 3571 2 = 5560 3 = 5570"
+$model = Read-Host "1 = $latp1 2 = $latp2 3 = $latp13"
 
 switch ($model)
 
@@ -282,15 +280,15 @@ switch ($model)
 
 "1"
 
-{ $global:model1 = "3571" }
+{ $global:model1 = "$latp1" }
 
 "2"
 
-{ $global:model1 = "5560" }
+{ $global:model1 = "$latp2" }
 
 "3"
 
-{ $global:model1 = "5570" }
+{ $global:model1 = "$latp3" }
 
 default
 
@@ -302,9 +300,6 @@ default
 }
 
 Function AssistedEntry {
-
-$confirmation = Read-Host "Assisted Entry? (y)"
-if ($confirmation -eq 'y') {
 
 $User = Read-Host -Prompt "`nEnter Users name"
 $Dep = Read-Host -Prompt "`nEnter Users Depatment"
@@ -336,7 +331,7 @@ $compname, $compdec | Format-List
 ChangesMade
 
 }
-}
+
 
 else {
 menuheader
@@ -344,6 +339,15 @@ NoChangesMade
 }
 }
 
+Function Reload {
+
+        Write-Host -Verbose "Reloading $pcname`n"
+        $global:objComputercur = Get-AdComputer -Identity $pcname -Properties * -Server $adserver
+        $global:compnamecur = $objComputercur | Select-Object -Property @{Name = 'Name'; Expression = {$_.Name}}
+        $global:compdeccur = $objComputercur | Select-Object -Property @{Name = 'Description'; Expression = {$_.'Description'}}
+        Start-Sleep 2
+        menuheader
+}
 
 #Action list
 
@@ -351,4 +355,3 @@ logo
 ADCheck
 Compname
 menuheader
-menu
