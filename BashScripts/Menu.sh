@@ -4,8 +4,8 @@
 #author:        Dave Edwards
 #               Based on script from MestreLion
 #created:       September 10 2022
-#updated:       N/A
-#version:       1.0 (v3 of update Script new code base)
+#updated:       September 14 2022
+#version:       1.1 (v3 of update Script new code base)
 #usage:         ./menu.sh
 #==============================================================================
 
@@ -19,10 +19,13 @@ cyan='\033[0;36m'
 clear='\033[0m' # Clear the color
 
 #Menu options
-options[0]="Main (Nala)"
-options[1]="Main (Apt)"
-options[2]="Snap"
-options[3]="Flatpak"
+options[0]="Check (Nala)"
+options[1]="Check (Apt)"
+options[2]="Check and Update (Nala)"
+options[3]="Check and Update (Apt)"
+options[4]="Snap"
+options[5]="Flatpak"
+options[6]="Exit"
 
 function LOG {
 log=/home/bobbins/Documents/Scripts/log_file.txt
@@ -30,6 +33,10 @@ log=/home/bobbins/Documents/Scripts/log_file.txt
 printf "Log File - " > $log
 # append date to log file
 date >> $log
+}
+
+function LOGO {
+cat logo.txt
 }
 
 function LOGEND {
@@ -40,23 +47,40 @@ function LOGEND {
 function ACTIONS {
     if [[ ${choices[0]} ]]; then
         #Option 1 selected
-        echo "Main Updates Using Nala"
-        upmainnala="true"
+        echo "Check for Updates Using Nala"
+        checknala="true"
     fi
     if [[ ${choices[1]} ]]; then
         #Option 2 selected
-        echo "Main Updates Using APT"
+        echo "Check for Updates Using APT"
+        checkapt="true"
+    fi
+
+    if [[ ${choices[2]} ]]; then
+        #Option 1 selected
+        echo "Check and update Using Nala"
+        upmainnala="true"
+    fi
+    if [[ ${choices[3]} ]]; then
+        #Option 2 selected
+        echo "Check and update Using APT"
         upmainapt="true"
     fi
-    if [[ ${choices[2]} ]]; then
+    if [[ ${choices[4]} ]]; then
         #Option 3 selected
         echo "Updating Snap"
         upsnap="true"
     fi
-    if [[ ${choices[3]} ]]; then
+    if [[ ${choices[5]} ]]; then
         #Option 4 selected
         echo "Updating Flatpak"
         upflatp="true"
+    fi
+
+    if [[ ${choices[6]} ]]; then
+        #Option 4 selected
+        echo "\nExiting"
+        exit
     fi
 }
 
@@ -68,7 +92,8 @@ clear
 
 #Menu function
 function MENU {
-    echo -e "Welcome to the update menu\n\n"
+    LOGO
+    echo -e "\n\nWelcome to the update menu\n"
     echo -e "Update Options\n"
     for NUM in ${!options[@]}; do
         echo "[""${choices[NUM]:- }""]" $(( NUM+1 ))") ${options[NUM]}"
@@ -94,6 +119,17 @@ while MENU && read -e -p "Select the desired options using their number (again t
 done
 
 ACTIONS
+if [ "$checknala" == "true" ]
+then
+    pman="nala"
+    sudo $pman update
+fi
+
+if [ "$checkapt" == "true" ]
+then
+    pman="apt"
+    sudo $pman Update
+fi
 if [ "$upmainnala" == "true" ]
 then
     pman="nala"
@@ -126,8 +162,4 @@ LOG
 LOGEND 
 fi
 
-echo -e "\n#================================================================#"
-echo -e "#                           ${green}Script Finished!${clear}                     #"
-echo -e "#================================================================#"
-echo -e "#                           ${green}Have A Nice Day!${clear}                     #"
-echo -e "#================================================================#"
+MENU
