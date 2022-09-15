@@ -53,7 +53,7 @@ function menu {
                     write-host "A - For Build Desk"
                     write-host "B - Assisted Entry"
                     write-host "C - Full Manual"
-                    write-host "D - Reload"
+                    write-host "R - Reload"
                     write-host ""
                     write-host "X - Exit"
                     write-host ""
@@ -63,7 +63,7 @@ function menu {
                     
                     write-host ""
                     
-                    $ok = $choice -match '^[abcdx]+$'
+                    $ok = $choice -match '^[abcrx]+$'
                     
                     if ( -not $ok) { write-host "Invalid selection" }
                 } until ( $ok )
@@ -84,7 +84,7 @@ function menu {
                         ManualEntryCheck
                     }
             
-                    "D"
+                    "R"
                     {
                         Reload
                     }
@@ -340,7 +340,7 @@ NoChangesMade
 }
 
 Function Reload {
-
+        Remove-Variable objComputer* -Scope Global
         Write-Host -Verbose "Reloading $pcname`n"
         $global:objComputercur = Get-AdComputer -Identity $pcname -Properties * -Server $adserver
         $global:compnamecur = $objComputercur | Select-Object -Property @{Name = 'Name'; Expression = {$_.Name}}
