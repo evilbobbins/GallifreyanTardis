@@ -8,6 +8,6 @@
 <!-- ACKNOWLEDGMENTS -->
 ## Whats in here
 
-* []()Bash scripts WIP
-* []()Powershell Scripts WIP
-
+* []()Work in progress scripts for:
+* []()Bash
+* []()Powershell
