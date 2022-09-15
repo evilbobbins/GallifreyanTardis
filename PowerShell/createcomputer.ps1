@@ -1,11 +1,11 @@
-#title:         CreatComputer.ps1
+#title:         CreateComputer.ps1
 #description:   Edit object Description
 #logo site      https://texteditor.com/multiline-text-art/
 #author:        Dave Edwards
 #created:       September 15 2022
 #updated:       
 #version:       1.0
-#usage:         ./createcomputer.ps1
+#usage:         ./description_v2.ps1
 #===================================================
 
 #Preload
@@ -70,13 +70,13 @@ Start-Sleep -Seconds 2
 
 if(!$objComputer) {
  
-        Write-Host -Verbose "$pcname Not Found!`n" -ForegroundColor Red
+        Write-Host -Verbose "$pcname Not Found!`n" -ForegroundColor Green
         Start-Sleep -Seconds 2
         Createcompmenu
         
 }
 else {
-        Write-Host -Verbose "$pcname Found!`n" -ForegroundColor Green
+        Write-Host -Verbose "$pcname Found!`n" -ForegroundColor Red
         $global:objComputercur = Get-AdComputer -Identity $pcname -Properties * -Server $adserver
         $global:compnamecur = $objComputercur | Select-Object -Property @{Name = 'Name'; Expression = {$_.Name}}
         $global:compdeccur = $objComputercur | Select-Object -Property @{Name = 'Description'; Expression = {$_.'Description'}}
@@ -182,23 +182,56 @@ Function Removecompmenu {
 
 
 Function CreateBHX {
-write-host "BHX"
-exit
+    Write-Host "`nCreate $pcname In`n$BHX`n" -ForegroundColor Green
+    $confirmation = Read-Host "Create Computer Object in BHX? (y)"
+    if ($confirmation -eq 'y') {
+New-ADComputer -Name "$pcname" -SamAccountName "$pcname" -PATH "$BHX"
+Start-Sleep -Seconds 10
+Reload
+else {
+    Createcompmenu
+}
+}
 }
 
 Function CreateCBD {
-write-host "CBD"
-exit
+    Write-Host "`nCreate $pcname In`n$CBD`n" -ForegroundColor Green
+    $confirmation = Read-Host "Create Computer Object in CBD? (y)"
+    if ($confirmation -eq 'y') {
+New-ADComputer -Name "$pcname" -SamAccountName "$pcname" -PATH "$CBD"
+Start-Sleep -Seconds 10
+Reload
+else {
+    Createcompmenu
+}
+}
 }
 
 Function CreateLON {
-write-host "LON"
-exit
+    Write-Host "`nCreate $pcname In`n$LON`n" -ForegroundColor Green
+    $confirmation = Read-Host "Create Computer Object in LON? (y)"
+    if ($confirmation -eq 'y') {
+New-ADComputer -Name "$pcname" -SamAccountName "$pcname" -PATH "$LON"
+Start-Sleep -Seconds 10
+Reload
+else {
+    Createcompmenu
+}
+}
 }
 
 Function RemoveComp {
-write-host "REMOVE"
-exit
+        Write-Host -Verbose "Remove $pcname" -ForegroundColor Red
+        $confirmation = Read-Host "Do you want to delete $pcname? (y)"
+        if ($confirmation -eq 'y') {
+        Remove-ADComputer -Identity "$objComputer" -Server $adserver
+        Write-Host -Verbose "Removing $pcname" -ForegroundColor Red
+        Start-Sleep -Seconds 8
+        Reload
+        else {
+        Removecompmenu
+        }
+}
 }
 
 Function Reload {
