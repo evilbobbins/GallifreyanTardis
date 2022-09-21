@@ -4,7 +4,7 @@
 #author:        Dave Edwards
 #               Based on script from MestreLion
 #created:       September 10 2022
-#updated:       N/A
+#updated:       September 21 2022
 #version:       1.1 (v3 of update Script new code base)
 #usage:         ./menu.sh
 #==============================================================================
@@ -27,6 +27,7 @@ options[4]="Snap"
 options[5]="Flatpak"
 options[6]="Exit"
 
+#Start log file
 function LOG {
     log=/home/bobbins/Documents/Scripts/log_file.txt
     # create log file or overrite if already present
@@ -35,12 +36,14 @@ function LOG {
     date >> $log
 }
 
-function LOGO {
-    cat logo.txt
-}
-
+#End log file
 function LOGEND {
     printf "End of log\n\n\n" >> $log
+}
+
+#Logo Display
+function LOGO {
+    cat logo.txt
 }
 
 #Actions to take based on selection
@@ -117,7 +120,7 @@ while MENU && read -e -p "Select the desired options using their number (again t
     fi
 done
 
-
+#Actions to process
 ACTIONS
 if [ "$checknala" == "true" ]
     then
