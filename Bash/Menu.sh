@@ -4,7 +4,7 @@
 #author:        Dave Edwards
 #               Based on script from MestreLion
 #created:       September 10 2022
-#updated:       September 14 2022
+#updated:       N/A
 #version:       1.1 (v3 of update Script new code base)
 #usage:         ./menu.sh
 #==============================================================================
@@ -28,15 +28,15 @@ options[5]="Flatpak"
 options[6]="Exit"
 
 function LOG {
-log=/home/bobbins/Documents/Scripts/log_file.txt
-# create log file or overrite if already present
-printf "Log File - " > $log
-# append date to log file
-date >> $log
+    log=/home/bobbins/Documents/Scripts/log_file.txt
+    # create log file or overrite if already present
+    printf "Log File - " > $log
+    # append date to log file
+    date >> $log
 }
 
 function LOGO {
-cat logo.txt
+    cat logo.txt
 }
 
 function LOGEND {
@@ -79,7 +79,7 @@ function ACTIONS {
 
     if [[ ${choices[6]} ]]; then
         #Option 4 selected
-        echo "\nExiting"
+        echo "Exiting"
         exit
     fi
 }
@@ -102,7 +102,6 @@ function MENU {
 }
 
 #Menu loop
-
 while MENU && read -e -p "Select the desired options using their number (again to uncheck, ENTER when done): " -n1 SELECTION && [[ -n "$SELECTION" ]]; do
     clear
     if [[ "$SELECTION" == *[[:digit:]]* && $SELECTION -ge 1 && $SELECTION -le ${#options[@]} ]]; then
@@ -118,46 +117,47 @@ while MENU && read -e -p "Select the desired options using their number (again t
     fi
 done
 
+
 ACTIONS
 if [ "$checknala" == "true" ]
-then
-    pman="nala"
-    sudo $pman update
-fi
+    then
+        pman="nala"
+       sudo $pman update
+    fi
 
-if [ "$checkapt" == "true" ]
-then
-    pman="apt"
-    sudo $pman Update
-fi
-if [ "$upmainnala" == "true" ]
-then
-    pman="nala"
-    sudo $pman update
-    sudo $pman upgrade -y
-    sudo $pman autoremove -y
-fi
+    if [ "$checkapt" == "true" ]
+    then
+        pman="apt"
+        sudo $pman update
+    fi
+    if [ "$upmainnala" == "true" ]
+    then
+        pman="nala"
+        sudo $pman update
+        sudo $pman upgrade -y
+        sudo $pman autoremove -y
+    fi
 
-if [ "$upmainapt" == "true" ]
-then
-    pman="apt"
-    sudo $pman Update
-    sudo $pman upgrade -y
-    sudo $pman autoremove -y
-fi
+    if [ "$upmainapt" == "true" ]
+    then
+        pman="apt"
+        sudo $pman update
+        sudo $pman upgrade -y
+        sudo $pman autoremove -y
+    fi
 
-if [ "$upsnap" == "true" ]
-then
-LOG
-    sudo snap refresh |& tee $log
-LOGEND 
-fi
+    if [ "$upsnap" == "true" ]
+    then
+        LOG
+        sudo snap refresh |& tee $log
+        LOGEND
+    fi
 
-if [ "$upflatp" == "true" ]
-then
-LOG
-    sudo flatpak update -y >> $log
-    echo -e "Removing Unused Flatpaks"
-    sudo flatpak uninstall --unused >> $log
-LOGEND 
-fi
+    if [ "$upflatp" == "true" ]
+    then
+        LOG
+        sudo flatpak update -y >> $log
+        echo -e "Removing Unused Flatpaks"
+        sudo flatpak uninstall --unused >> $log
+        LOGEND
+    fi
