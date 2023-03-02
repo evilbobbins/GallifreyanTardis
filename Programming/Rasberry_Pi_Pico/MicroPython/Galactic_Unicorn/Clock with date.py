@@ -8,6 +8,8 @@
 # WIFI_PASSWORD = "Your WiFi password"
 #
 # Clock synchronizes time on start, and resynchronizes if you press the A button
+#
+# Edited to show time (HH:MM) and Date (DD:MM)
 
 import time
 import math
