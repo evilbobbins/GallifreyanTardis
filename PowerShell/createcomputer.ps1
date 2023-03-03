@@ -28,10 +28,10 @@ $global:logo = @"
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 "@
-$global:adserver = "SDCBFISLTC21" # AD server to lockon to
-$global:BHX = "OU=UK-Birmingham,OU=EMEA,OU=Workstations,OU=FIS,DC=FNFIS,DC=com"
-$global:CBD = "OU=UK-Cumbernauld,OU=EMEA,OU=Workstations,OU=FIS,DC=FNFIS,DC=com"
-$global:LON = "OU=UK-Canary Wharf,OU=EMEA,OU=Workstations,OU=FIS,DC=FNFIS,DC=com"
+$global:adserver = "Working server name" # AD server to lockon to
+$global:AD1 = "OU LOCATION"
+$global:AD2= "OU LOCATION"
+$global:AD3 = "OU LOCATION"
 
 
 
@@ -89,9 +89,9 @@ Function Createcompmenu {
         do {
                 do {
                     write-host ""
-                    write-host "A - Create BHX"
-                    write-host "B - Create CBD"
-                    write-host "C - Create LON"
+                    write-host "A - Create AD1"
+                    write-host "B - Create AD2"
+                    write-host "C - Create AD3"
                     write-host ""
                     write-host "R - Restart"
                     write-host ""
@@ -111,18 +111,18 @@ Function Createcompmenu {
                 switch -Regex ( $choice ) {
                     "A"
                     {
-                        CreateBHX
+                        CreateAD1
                         
                     }
                     
                     "B"
                     {
-                        CreateCBD
+                        CreateAD2
                     }
             
                     "C"
                     {
-                        CreateLON
+                        CreateAD3
                     }
 
                     "R"
@@ -182,8 +182,8 @@ Function Removecompmenu {
 
 
 Function CreateBHX {
-    Write-Host "`nCreate $pcname In`n$BHX`n" -ForegroundColor Green
-    $confirmation = Read-Host "Create Computer Object in BHX? (y)"
+    Write-Host "`nCreate $pcname In`n$AD1`n" -ForegroundColor Green
+    $confirmation = Read-Host "Create Computer Object in AD1? (y)"
     if ($confirmation -eq 'y') {
 New-ADComputer -Name "$pcname" -SamAccountName "$pcname" -PATH "$BHX"
 Start-Sleep -Seconds 10
@@ -195,8 +195,8 @@ else {
 }
 
 Function CreateCBD {
-    Write-Host "`nCreate $pcname In`n$CBD`n" -ForegroundColor Green
-    $confirmation = Read-Host "Create Computer Object in CBD? (y)"
+    Write-Host "`nCreate $pcname In`n$AD2`n" -ForegroundColor Green
+    $confirmation = Read-Host "Create Computer Object in AD2? (y)"
     if ($confirmation -eq 'y') {
 New-ADComputer -Name "$pcname" -SamAccountName "$pcname" -PATH "$CBD"
 Start-Sleep -Seconds 10
@@ -208,8 +208,8 @@ else {
 }
 
 Function CreateLON {
-    Write-Host "`nCreate $pcname In`n$LON`n" -ForegroundColor Green
-    $confirmation = Read-Host "Create Computer Object in LON? (y)"
+    Write-Host "`nCreate $pcname In`n$AD3`n" -ForegroundColor Green
+    $confirmation = Read-Host "Create Computer Object in AD3? (y)"
     if ($confirmation -eq 'y') {
 New-ADComputer -Name "$pcname" -SamAccountName "$pcname" -PATH "$LON"
 Start-Sleep -Seconds 10
