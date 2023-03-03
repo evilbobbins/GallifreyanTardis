@@ -4,9 +4,13 @@ The Raspberrry pi Pico is a micro controller by the Raspberry pi foundation util
 
 Raspberry Pi Pico credit to Adafruit 
 
-![Alt text](https://cdn-learn.adafruit.com/assets/assets/000/098/848/large1024/raspberry_pi_circuitpython_RP_01_top_ORIG_2021_01b.jpg?1611338794?raw=true "Image")
-![Alt text](https://cdn-learn.adafruit.com/assets/assets/000/098/793/large1024/circuitpython_RP_01_quarter_ORIG_2021_01.jpg?1611184210?raw=true "Image")
+## Original Pico
 
+<img src="https://cdn-shop.adafruit.com/970x728/4864-00.jpg" width="200"> <img src="https://cdn-shop.adafruit.com/970x728/4864-03.jpg" width="200"> <img src="https://cdn-shop.adafruit.com/970x728/4864-02.jpg" width="200"> <img src="https://cdn-shop.adafruit.com/970x728/4864-01.jpg" width="200">
+
+## Pico W (Wifi)
+
+<img src="https://cdn-shop.adafruit.com/970x728/5526-01.jpg" width="200"> <img src="https://cdn-shop.adafruit.com/970x728/5526-04.jpg" width="200"> <img src="https://cdn-shop.adafruit.com/970x728/5526-03.jpg" width="200"> <img src="https://cdn-shop.adafruit.com/970x728/5526-02.jpg" width="200">
 
 Pico Pin referance credit to Adafruit 
 
