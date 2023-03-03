@@ -5,8 +5,9 @@
 </h1>
 
 <!-- ACKNOWLEDGMENTS -->
-## Whats in here
+## Whats in here?
 
-* []()Work in progress scripts for:
+* []()Project Work in progress for:
 * []()Bash
 * []()Powershell
+* []()Programming
