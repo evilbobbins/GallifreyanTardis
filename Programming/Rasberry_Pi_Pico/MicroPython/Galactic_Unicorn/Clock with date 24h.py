@@ -9,7 +9,7 @@
 #
 # Clock synchronizes time on start, and resynchronizes if you press the A button
 #
-# Edited to show time (HH:MM) and Date (DD:MM)
+# Edited to show time (HH:MM) and Date (DD:MM) - 24 hour clock display
 
 import time
 import math
