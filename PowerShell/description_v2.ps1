@@ -27,15 +27,15 @@ $logo = @"
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 "@
-$global:adserver = "SDCBFISLTC21" # AD server to lockon to 
+$global:adserver = "Working server name" # AD server to lockon to 
 $global:builddesk = "* On Build Desks" #Build desk name
 #Laptop Models
-$global:latl1 = "5400"
-$global:latl2 = "7420"
-$global:latl3 = "7430"
-$global:latp1 = "3571"
-$global:latp2 = "5560"
-$global:latp3 = "5570"
+$global:latl1 = "Model1"
+$global:latl2 = "Model2"
+$global:latl3 = "Model3"
+$global:latp1 = "Model4"
+$global:latp2 = "Model5"
+$global:latp3 = "Model6"
 
 
 #Functions
@@ -216,7 +216,7 @@ Function LaptopType {
 #$Computermodel = Read-Host -Prompt "`nEnter Computer Type"
 
 write-output "Laptop type`n"
-$type = Read-Host "1 = Latitude 2 = Precison"
+$type = Read-Host "1 = Type1 2 = Type2"
 
 switch ($type)
 
@@ -224,11 +224,11 @@ switch ($type)
 
 "1"
 
-{ $global:type1 = "Latitude" }
+{ $global:type1 = "Type1" }
 
 "2"
 
-{ $global:type1 = "Precision" }
+{ $global:type1 = "Type2" }
 
 default
 
@@ -238,7 +238,7 @@ default
 
 
 
-if($type1 -match 'Latitude') {
+if($type1 -match 'Type1') {
 
 #$Computermodel = Read-Host -Prompt "`nEnter Computer Model"
 
