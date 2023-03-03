@@ -7,7 +7,7 @@
 <!-- ACKNOWLEDGMENTS -->
 ## Whats in here?
 
-* []()Project Work in progress for:
+* []()Work in progress:
 * []()Bash
 * []()Powershell
 * []()Programming
