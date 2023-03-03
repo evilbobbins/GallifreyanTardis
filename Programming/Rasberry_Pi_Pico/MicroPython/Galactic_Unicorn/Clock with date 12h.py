@@ -137,6 +137,8 @@ def sync_time():
 
     if max_wait > 0:
         print("Connected")
+        ip = wlan.ifconfig()[0]
+        print ("Current IP - ", ip)
 
         try:
             ntptime.settime()
