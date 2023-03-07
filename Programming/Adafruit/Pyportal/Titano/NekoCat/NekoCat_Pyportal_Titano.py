@@ -5,6 +5,9 @@
 # SPDX-FileCopyrightText: 2022 TimCocks for Adafruit Industries
 #
 # SPDX-License-Identifier: MIT
+#
+# Customised for the Pyportal Titano 
+#
 import time
 import random
 import board
