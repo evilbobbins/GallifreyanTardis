@@ -1,5 +1,7 @@
 Container for my CircuitPython Code for Adafruits PyPortal Titano
 
+<img src="https://cdn-shop.adafruit.com/970x728/4444-10.jpg" width="300"> <img src="https://cdn-shop.adafruit.com/970x728/4444-09.jpg" width="300"> <img src="https://cdn-shop.adafruit.com/970x728/4444-08.jpg" width="300">
+
 [PyPortal Titano Adafruit Store](https://www.adafruit.com/product/4444)
 
 ## PyPortal Titano Features
@@ -15,9 +17,6 @@ Container for my CircuitPython Code for Adafruits PyPortal Titano
 * MicroSD card slot
 * 8MB flash
 * plug-in ports for I2C and 2 analog/digital pins
-
-
-<img src="https://cdn-shop.adafruit.com/970x728/4444-10.jpg" width="300"> <img src="https://cdn-shop.adafruit.com/970x728/4444-09.jpg" width="300"> <img src="https://cdn-shop.adafruit.com/970x728/4444-08.jpg" width="300">
 
 This container requires Adafruit CircuitPython: https://learn.adafruit.com/welcome-to-circuitpython/what-is-circuitpython
 
